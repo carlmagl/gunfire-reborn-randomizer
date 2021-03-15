@@ -1,6 +1,5 @@
 <script>
   export let weaponClasses;
-  export let randomize;
   import Weapon from "../components/Weapon.svelte";
   $: weapons = () => {
     let weapons = [];

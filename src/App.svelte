@@ -20,20 +20,47 @@
 
   let users = [{ name: "Carl" }, { name: "Petter" }, { name: "Oliver" }];
 
+  let removed = false;
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  function randomizeAgain() {
+  function updateInfo() {
     heroes = [...heroes];
     weaponClasses = [...weaponClasses];
+  }
+  function removeMeleeWeapon() {
+    if (removed)
+      weaponClasses.push({
+        name: "Meele Weapons",
+        imgUrl: "/weapons/Melee_Weapon.png",
+      });
+    else {
+      weaponClasses.splice(-1, 1);
+    }
+    updateInfo();
+    removed = !removed;
   }
 </script>
 
 <main>
   <h1>Gunfire Reborn randomizer</h1>
   <p>Welcome to the gunfire reborn randomizer</p>
-  <button on:click={() => randomizeAgain()}>Randomize</button>
+  <button on:click={() => updateInfo()}>Randomize</button>
+  <div class="radio">
+    <input
+      type="checkbox"
+      id="melee"
+      class="collapsed"
+      on:click={() => removeMeleeWeapon()}
+      value="Remove melee weapon"
+    />
+    <label for="meele">Remove melee weapon</label>
+  </div>
+  {#if removed}
+    <h3>Melee Weapons removed</h3>
+  {/if}
   <section class="builds">
     {#each users as user}
       <div class="user">
@@ -51,6 +78,11 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
+  }
+
+  input {
+    margin: 0;
+    margin-right: 20px;
   }
 
   h1 {
@@ -79,5 +111,11 @@
     border-radius: 8px;
     border: solid;
     border-color: #809ead;
+  }
+  .radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 </style>
