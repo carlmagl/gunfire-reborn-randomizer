@@ -1,13 +1,13 @@
 <script>
   import Hero from "./components/Hero.svelte";
   import Weapons from "./components/Weapons.svelte";
-  const heroes = [
+  let heroes = [
     { name: "Crown Prince", imgUrl: "/heroes/Crown_Prince_Icon.png" },
     { name: "Ao Bai", imgUrl: "/heroes/Ao_Bai_Icon.png" },
     { name: "Qing Yan", imgUrl: "/heroes/Qing_Yan_Icon.png" },
     { name: "Lei Luo", imgUrl: "/heroes/Lei_Luo_Icon.png" },
   ];
-  const weaponClasses = [
+  let weaponClasses = [
     { name: "Rifles", imgUrl: "/weapons/Rifles.png" },
     { name: "Submachine guns", imgUrl: "/weapons/Submachine_Gun.png" },
     { name: "Pistols", imgUrl: "/weapons/Pistols.png" },
@@ -24,21 +24,22 @@
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  function addUser(name) {
-    users = [...users, name];
+  function randomizeAgain() {
+    heroes = [...heroes];
+    weaponClasses = [...weaponClasses];
   }
 </script>
 
 <main>
   <h1>Gunfire Reborn randomizer</h1>
   <p>Welcome to the gunfire reborn randomizer</p>
-  <button />
+  <button on:click={() => randomizeAgain()}>Randomize</button>
   <section class="builds">
     {#each users as user}
       <div class="user">
         <h2>{user.name}</h2>
         <Hero hero={heroes[getRandomInt(heroes.length)]} />
-        <Weapons {weaponClasses} />
+        <Weapons bind:weaponClasses />
       </div>
     {/each}
   </section>

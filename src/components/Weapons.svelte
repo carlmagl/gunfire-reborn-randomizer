@@ -1,13 +1,12 @@
 <script>
   export let weaponClasses;
-  import App from "../App.svelte";
+  export let randomize;
   import Weapon from "../components/Weapon.svelte";
-  const weapons = () => {
+  $: weapons = () => {
     let weapons = [];
-    let tempWeapons = weaponClasses;
+    let tempWeapons = [...weaponClasses];
     weapons[0] = tempWeapons.splice(getRandomInt(tempWeapons.length), 1);
     weapons[1] = tempWeapons.splice(getRandomInt(tempWeapons.length), 1);
-    console.log(weapons);
     return weapons;
   };
   function getRandomInt(max) {
