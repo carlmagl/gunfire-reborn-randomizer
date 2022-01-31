@@ -155,11 +155,6 @@
     border: solid;
     border-color: #809ead;
   }
-  @media (prefers-color-scheme: dark) {
-  body:not(.light) {
-
-  }
-}
   .radio {
     display: flex;
     flex-direction: row;
